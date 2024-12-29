@@ -1,4 +1,4 @@
-import json
+import json #From questions.json file
 
 with open("questions.json", "r") as file:
     content = file.read()  # is string
