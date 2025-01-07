@@ -1,8 +1,4 @@
-  <a href="https://github.com/Armanman33">
-    <img src="./assets/contributions.svg" />
-  </a>
-
-
+#Please check both main & master Branches.
 
 
 
