@@ -1,0 +1,31 @@
+def exchange_money(budget, exchange_rate):
+    """Calculate the exchanged amount of foreign currency."""
+    return budget / exchange_rate
+
+
+def get_change(budget, exchanging_value):
+    """Calculate the amount left after exchanging money."""
+    return budget - exchanging_value
+
+
+def get_value_of_bills(denomination, number_of_bills):
+    """Calculate the total value of the bills."""
+    return number_of_bills * denomination
+
+
+def get_number_of_bills(amount, denomination):
+    """Determine the number of whole bills that can be obtained."""
+    return int(amount / denomination)
+
+
+def get_leftover_of_bills(amount, denomination):
+    """Calculate the leftover amount after exchanging into bills."""
+    return amount % denomination
+
+
+def exchangeable_value(budget, exchange_rate, spread, denomination):
+    """Calculate the maximum value of new currency that can be obtained."""
+    final_ex = exchange_rate * (1 + spread / 100)
+    total_newcurrency = budget / final_ex
+    max_value = total_newcurrency - (total_newcurrency % denomination)
+    return int(max_value)
