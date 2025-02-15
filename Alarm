@@ -1,0 +1,45 @@
+"""Module for reactor control system.
+
+This module contains functions to determine reactor criticality,
+efficiency, and fail-safe mechanisms.
+"""
+def is_criticality_balanced(temperature, neutrons_emitted):
+        
+    """Verify criticality is balanced."""
+    calcs = temperature * neutrons_emitted
+    return temperature < 800 and neutrons_emitted > 500 and calcs < 500000
+
+def reactor_efficiency(voltage, current, theoretical_max_power):
+    calcs = (voltage * current / theoretical_max_power) * 100  # Get efficiency percentage
+
+    if calcs >= 80:  
+        return 'green'
+    if 60 <= calcs < 80:
+        return 'orange'
+    if 30 <= calcs < 60:
+        return 'red'
+    return 'black' #No need to wite else because it is last condition
+
+print(reactor_efficiency(200, 50, 15000))
+
+
+
+def fail_safe(temperature, neutrons_produced_per_second, threshold):
+    """Assess and return status code for the reactor.
+
+    :param temperature: int or float - value of the temperature in kelvin.
+    :param neutrons_produced_per_second: int or float - neutron flux.
+    :param threshold: int or float - threshold for category.
+    :return: str - one of ('LOW', 'NORMAL', 'DANGER').
+
+    1. 'LOW' -> `temperature * neutrons per second` < 90% of `threshold`
+    2. 'NORMAL' -> `temperature * neutrons per second` +/- 10% of `threshold`
+    3. 'DANGER' -> `temperature * neutrons per second` is not in the above-stated ranges
+    """
+    calcs = temperature * neutrons_produced_per_second 
+
+    if calcs < 0.9 * threshold:
+        return 'LOW'
+    if 0.9 * threshold <= calcs <= 1.1 * threshold:  # Correct range for NORMAL
+        return 'NORMAL'
+    return 'DANGER'  # Anything outside the previous conditions
